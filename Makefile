@@ -6,7 +6,7 @@ check:
 		echo >&2 "Cannot find docker, install docker first. See: http://www.docker.com"; exit 1; fi
 
 install: check
-	L=$$HOME/bin/eclipse && cp ./eclipse $$L && chmod +x $$L && export PATH=$$PATH:$$L && chmod +x $$L
+	@mkdir -p $$HOME/bin && L=$$HOME/bin/eclipse && cp ./eclipse $$L && chmod +x $$L && export PATH=$$PATH:$$L && chmod +x $$L
 	@echo "Installed successfuly, please run eclipse!"
 
 .PHONY: alpine ubuntu java git-dev check
