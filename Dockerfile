@@ -4,7 +4,7 @@ MAINTAINER James Chan <szjameschan@gmail.com>
 
 # Install libgtk as a separate step so that we can share the layer above with
 # the netbeans image
-RUN apt-get update && apt-get install -y libgtk2.0-0 libcanberra-gtk-module
+RUN apt-get update && apt-get install -y libgtk2.0-0 libcanberra-gtk-module libxtst6
 
 RUN wget http://mirrors.neusoft.edu.cn/eclipse/technology/epp/downloads/release/neon/R/eclipse-java-neon-R-linux-gtk-x86_64.tar.gz -O /tmp/eclipse.tar.gz  && \
     echo 'Installing eclipse' && \
