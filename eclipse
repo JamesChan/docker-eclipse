@@ -1,8 +1,31 @@
 #!/bin/bash
 mkdir -p .eclipse-docker
+os=`uname`
+if [ "$os" == "Darwin" ]
+then
+	## open -a XQuartz
+	echo "Binding tcp port 6000 to X server:XQuartz display socket: $DISPLAY"
+	socat TCP-LISTEN:6000,reuseaddr,fork UNIX-CLIENT:\"$DISPLAY\" &
+	pid=$!
+	ip=`ifconfig en0 | grep netmask | cut -d" " -f2`
+	display=$ip:0 
+elif [ "$os" == "Linux" ]
+then
+	## do nothing
+	echo "DISPALY = $DISPLAY\n"
+	display=$DISPLAY
+else
+	echo "OS = $os"
+fi
+
 docker run -ti --rm \
-           -e DISPLAY=$DISPLAY \
+           -e DISPLAY=$display \
            -v /tmp/.X11-unix:/tmp/.X11-unix \
            -v `pwd`/.eclipse-docker:/home/developer \
            -v `pwd`:/workspace \
            my/eclipse/ubuntu
+
+if [ "$os" == "Darwin" ]
+then
+	kill $pid
+fi
