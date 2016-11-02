@@ -12,11 +12,13 @@ then
 elif [ "$os" == "Linux" ]
 then
 	## do nothing
-	echo "DISPALY = $DISPLAY\n"
+
 	display=$DISPLAY
 else
 	echo "OS = $os"
 fi
+
+echo "DISPALY = $DISPLAY\n"
 
 docker run -ti --rm \
            -e DISPLAY=$display \
